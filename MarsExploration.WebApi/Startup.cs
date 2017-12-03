@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using SimpleInjector;
+using MarsExploration.WebApi.DependencyInjection;
 
 namespace MarsExploration.WebApi
 {
     public class Startup
     {
+        private Container container = new Container();
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -24,6 +22,8 @@ namespace MarsExploration.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            SimpleInjectorConfiguration.IntegrateSimpleInjector(services, container);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -33,6 +33,9 @@ namespace MarsExploration.WebApi
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            container.RegisterMvcControllers(app);
+            container.RegisterMvcViewComponents(app);
 
             app.UseMvc();
         }
