@@ -23,7 +23,18 @@ namespace MarsExploration.WebApi
         {
             services.AddMvc();
 
+            EnableCors(services);
             SimpleInjectorConfiguration.IntegrateSimpleInjector(services, container);
+        }
+
+        private void EnableCors(IServiceCollection services)
+        {
+            services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,6 +45,7 @@ namespace MarsExploration.WebApi
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors("CorsPolicy");
             container.RegisterMvcControllers(app);
             container.RegisterMvcViewComponents(app);
 
