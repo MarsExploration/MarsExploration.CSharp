@@ -1,5 +1,8 @@
 ﻿namespace MarsExploration.Domain.Models
 {
+    /// <summary>
+    /// Direções possíveis de uma sonda
+    /// </summary>
     public enum Direction
     {
         North = 0,

@@ -5,6 +5,9 @@ using System.Linq;
 
 namespace MarsExploration.Domain.Commands
 {
+    /// <summary>
+    /// Classe responsável por executar o comando de movimentação das sondas e retornar o resultado
+    /// </summary>
     public class MoveProbesCommandHandler : ICommandHandler<MoveProbesCommand, MoveProbesCommandResult>
     {
         private readonly IDirectionTurner _directionTurner;

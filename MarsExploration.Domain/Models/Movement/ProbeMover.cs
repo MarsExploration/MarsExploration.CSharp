@@ -2,6 +2,9 @@
 
 namespace MarsExploration.Domain.Models
 {
+    /// <summary>
+    /// Implementação da ação de movimentar uma sonda
+    /// </summary>
     public class ProbeMover : IProbeMover
     {
         public Position Move(Position previousPosition, Coordinates upperRightLimit)

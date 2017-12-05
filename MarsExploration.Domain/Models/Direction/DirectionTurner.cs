@@ -4,6 +4,9 @@ using System.Text;
 
 namespace MarsExploration.Domain.Models
 {
+    /// <summary>
+    /// Implementação da ação de girar uma sonda
+    /// </summary>
     public class DirectionTurner : IDirectionTurner
     {
         public Direction TurnLeft(Direction previousDirection)
